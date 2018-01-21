@@ -12,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.util.FileUtils;
 
 import java.io.File;
@@ -27,6 +29,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HomePageInstallController {
+    final static Logger log = LogManager.getLogger(Main.class);
+
     @FXML
     TextField mail;
     @FXML
@@ -89,6 +93,8 @@ public class HomePageInstallController {
         if (!matcherMail.find()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur à l'identification !");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream("image/icon.png")));
             alert.setHeaderText(null);
             alert.setResizable(false);
             alert.setContentText("Merci de renseigner un email valide !");
@@ -102,6 +108,8 @@ public class HomePageInstallController {
         if (!matcherPassword.find()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur à l'identification !");
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream("image/icon.png")));
             alert.setHeaderText(null);
             alert.setResizable(false);
             alert.setContentText("Merci de renseigner un mot de passe valide !");

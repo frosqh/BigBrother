@@ -18,16 +18,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         String appDataLoc = System.getenv("APPDATA");
         String fileLoc = appDataLoc + "\\AMD\\BigBrother\\";
 
         File installDir = new File(fileLoc);
 
+        log.error("BITE\n");
+
         if (installDir.exists()){
             log.error("Dir already exists !\n");
             return;
         }
-
+        //On effectue l'install !
         Parent root = FXMLLoader.load(getClass().getResource("view/homePageInstall.fxml"));
         primaryStage.setTitle("BigBrother");
         primaryStage.setScene(new Scene(root, 1280, 720));
