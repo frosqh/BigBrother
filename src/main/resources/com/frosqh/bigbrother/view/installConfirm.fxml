@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frosqh.bigbrother.controller.installConfirmController">
+    <children>
+        <AnchorPane prefHeight="200.0" prefWidth="1280.0" style="-fx-background-color: #C42024;">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1066.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/BigBrother.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="14.0" layoutY="25.0" prefHeight="150.0" prefWidth="1085.0" text="Un mail vous a été envoyé !&#10;&#10;Pour confirmer la création de votre compte, merci de bien vouloir renseigner le code reçu&#10;par mail ci-dessous !" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Bold" size="22.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Label layoutX="328.0" layoutY="352.0" text="Code">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <TextField fx:id="mail" layoutX="566.0" layoutY="355.0" prefHeight="25.0" prefWidth="209.0" />
+        <JFXButton buttonType="RAISED" layoutX="586.0" layoutY="536.0" mnemonicParsing="false" onAction="#submit" ripplerFill="RED" text="Valider">
+            <font>
+                <Font name="Constantia" size="24.0" />
+            </font></JFXButton>
+    </children>
+</AnchorPane>

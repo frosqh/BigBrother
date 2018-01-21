@@ -32,11 +32,13 @@ public class Main extends Application {
         primaryStage.setTitle("BigBrother");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("image/icon.png")));
+        Session.set("stage",primaryStage);
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
+        Session.init();
         launch(args);
     }
 }
