@@ -1,0 +1,68 @@
+/*apply plugin: 'java'
+apply plugin: 'application'
+
+group = 'com.frosqh.bigbrother'
+version = '1.0'
+
+mainClassName = 'com.frosqh.bigbrother.Main'
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'BigBrother',
+        	'Implementation-Version': 1.0,
+        	'Main-Class': 'com.frosqh.bigbrother.Main'
+    }
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    //compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '2.2.0.201212191850-r'
+    compile 'org.apache.logging.log4j:log4j-api:2.10.0'
+    compile 'org.apache.logging.log4j:log4j-core:2.10.0'
+    compile 'com.jfoenix:jfoenix:1.7.0'
+    compile 'org.controlsfx:controlsfx:8.0.5'
+    testCompile 'junit:junit:4.12'
+}*/
+
+group 'com.frosqh'
+version '0.1-ALPHA'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'BigBrother',
+                'Implementation-Version': 1.0,
+                'Main-Class': 'com.frosqh.bigbrother.Main'
+    }
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile 'org.apache.logging.log4j:log4j-api:2.10.0'
+    compile 'org.apache.logging.log4j:log4j-core:2.10.0'
+    compile 'com.jfoenix:jfoenix:1.7.0'
+    compile 'org.controlsfx:controlsfx:8.0.5'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
