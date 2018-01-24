@@ -6,29 +6,28 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileWriter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 
-public class Main extends Application {
-    final static Logger log = LogManager.getLogger(Main.class);
+
+public class Main2 extends Application {
+    final static Logger log = LogManager.getLogger(Main2.class);
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        String appDataLoc = System.getenv("APPDATA");
+        /*String appDataLoc = System.getenv("APPDATA");
         String fileLoc = appDataLoc + "\\AMD\\BigBrother\\config.cfg";
         File installDir = new File(fileLoc);
 
         if (installDir.exists()){
             log.info("File already exists !");
             return;
-        }
+        }*/
         //On effectue l'install !
-        Parent root = FXMLLoader.load(getClass().getResource("view/homePageInstall.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/configPane.fxml"));
         primaryStage.setTitle("BigBrother");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("image/icon.png")));

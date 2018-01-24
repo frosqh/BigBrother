@@ -34,7 +34,7 @@ dependencies {
 }*/
 
 group 'com.frosqh'
-version '0.1-ALPHA'
+version '0.2-ALPHA'
 
 apply plugin: 'groovy'
 apply plugin: 'java'

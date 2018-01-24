@@ -11,7 +11,7 @@ public class SendMail {
     public static void send(String address, String content, String subject, boolean html){
         String to = address;
 
-        String from = "bigbrother@frosqh.com";
+        String from = "BigBrother";
 
         String host = "smtp.gmail.com";
 

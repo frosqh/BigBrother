@@ -11,23 +11,75 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
+import java.io.*;
 
 public class installConfirmController {
     final static Logger log = LogManager.getLogger(Main.class);
 
+    private final static String initConfig = "//Default parameters\n" +
+            "default_max_per_day 2\n" +
+            "default_max_session 1\n" +
+            "default_forbid 00;01;02;03;04;05;06;07;08;22;23;12;13;14\n" +
+            "\n" +
+            "//On startup\n" +
+            "start_shown 1\n" +
+            "\n" +
+            "//Session per day\n" +
+            "max_monday -1\n" +
+            "max_session_monday -1\n" +
+            "max_tuesday -1\n" +
+            "max_session_tuesday -1\n" +
+            "max_wednesday -1\n" +
+            "max_session_wednesday -1\n" +
+            "max_thursday -1\n" +
+            "max_session_thursday -1\n" +
+            "max_friday -1\n" +
+            "max_session_friday -1\n" +
+            "max_saturday -1\n" +
+            "max_session_saturday -1\n" +
+            "max_sunday -1\n" +
+            "max_session_sunday -1\n" +
+            "\n" +
+            "//Forbidden hours\n" +
+            "forbid_monday -1\n" +
+            "forbid_tuesday -1\n" +
+            "forbid_wednesday -1\n" +
+            "forbid_thursday -1\n" +
+            "forbid_friday -1\n" +
+            "forbid_saturday -1\n" +
+            "forbid_sunday -1";
+
     @FXML
     TextField code;
 
-    public void submit(ActionEvent actionEvent) {
+    public void submit(ActionEvent actionEvent) throws IOException {
         if (code.getText().equals(Session.get("code"))){
-            System.out.println("YESSSSS ! ");
             String appDataLoc = System.getenv("APPDATA");
-            String fileLoc = appDataLoc + "\\AMD\\BigBrother\\";
+            String fileLoc = appDataLoc + "\\AMD\\BigBrother\\config.cfg";
+            String dirAccount = appDataLoc + "\\AMD\\BigBrother\\data\\0x52d8\\";
+            String fileAccount = appDataLoc + "\\AMD\\BigBrother\\data\\0x52d8\\back.pwd";
 
-            File installDir = new File(fileLoc);
+            File config = new File(fileLoc);
+            File dirPassword = new File(dirAccount);
+            File password = new File(fileAccount);
 
-            installDir.mkdirs();
+            config.createNewFile();
+            dirPassword.mkdirs();
+            password.createNewFile();
+
+            BufferedWriter buffWriter = new BufferedWriter(new FileWriter(fileAccount));
+            buffWriter.write((String) Session.get("mail"));
+            buffWriter.write("\n");
+            String pass = (String) Session.get("password");
+            for (Byte b : pass.getBytes()){
+                buffWriter.write(b+3);
+            }
+            buffWriter.write("\n");
+            buffWriter.close();
+
+            buffWriter = new BufferedWriter(new FileWriter(fileLoc));
+            buffWriter.write(initConfig);
+            buffWriter.close();
 
         } else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

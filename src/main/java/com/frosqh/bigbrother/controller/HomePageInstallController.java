@@ -14,19 +14,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.util.FileUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class HomePageInstallController {
     final static Logger log = LogManager.getLogger(Main.class);
@@ -44,6 +38,7 @@ public class HomePageInstallController {
             String code = generateCode();
             Session.set("mail",mail.getText());
             Session.set("code",code);
+            Session.set("password",password.getText());
             String content = generateContent(code);
             SendMail.send((String) Session.get("mail"),content,"Validation de votre compte BigBrother", true);
 
@@ -56,13 +51,16 @@ public class HomePageInstallController {
         }
     }
 
-    private String generateContent(String code) {
-        String fileURL = String.valueOf(Main.class.getResource("html/mail.html"));
-        URL url = Main.class.getResource("html/mail.html");
-        System.out.println(String.valueOf(url).substring(6));
+    private String generateContent(String code) throws IOException {
         try {
-            byte[] encoded = Files.readAllBytes(Paths.get(String.valueOf(url).substring(6)));
-            String htmlContent = new String(encoded, Charset.defaultCharset());
+            String response = "";
+            byte[] buffer = new byte[10000];
+            InputStream html = Main.class.getResourceAsStream("html/mail.html");
+            int nRead = 0;
+            while ((nRead = html.read(buffer)) != -1) {
+                response += new String(buffer);
+            }
+            String htmlContent = response;
             htmlContent = htmlContent.replace("codeToFill",code);
             htmlContent = htmlContent.replace("address", ((String) Session.get("mail")).substring(0,((String) Session.get("mail")).lastIndexOf("@")));
             return htmlContent;
@@ -99,7 +97,7 @@ public class HomePageInstallController {
             alert.setResizable(false);
             alert.setContentText("Merci de renseigner un email valide !");
             alert.show();
-            return true;
+            return false;
         }
 
         Pattern patternPassword = Pattern.compile(".+");
