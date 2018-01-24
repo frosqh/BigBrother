@@ -19,8 +19,17 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        String appDataLoc = System.getenv("APPDATA");
-        String fileLoc = appDataLoc + "\\AMD\\BigBrother\\config.cfg";
+        String os = System.getProperty("os.name");
+        String appDataLoc;
+        if (os.contains("nix") || os.contains("nux") || os.contains("aix")){
+            appDataLoc = System.getProperty("user.home");
+        } else {
+
+            appDataLoc = System.getenv("APPDATA");
+        }
+
+        String fileLoc = appDataLoc + File.separator+"AMD"+File.separator+"bigbrother"+File.separator+"config.cfg";
+
         File installDir = new File(fileLoc);
 
         if (installDir.exists()){
