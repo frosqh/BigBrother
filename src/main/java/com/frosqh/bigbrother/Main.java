@@ -13,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class Main extends Application {
+public class    Main extends Application {
     final static Logger log = LogManager.getLogger(Main.class);
 
     @Override

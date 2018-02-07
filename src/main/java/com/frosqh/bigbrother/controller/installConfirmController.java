@@ -16,7 +16,7 @@ import java.io.*;
 public class installConfirmController {
     final static Logger log = LogManager.getLogger(Main.class);
 
-    private final static String initConfig = "//Default parameters\n" +
+    public final static String initConfig = "//Default parameters\n" +
             "default_max_per_day 2\n" +
             "default_max_session 1\n" +
             "default_forbid 00;01;02;03;04;05;06;07;08;22;23;12;13;14\n" +
