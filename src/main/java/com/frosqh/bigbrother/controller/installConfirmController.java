@@ -4,6 +4,9 @@ import com.frosqh.bigbrother.Main;
 import com.frosqh.bigbrother.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -80,6 +83,12 @@ public class installConfirmController {
             buffWriter = new BufferedWriter(new FileWriter(fileLoc));
             buffWriter.write(initConfig);
             buffWriter.close();
+
+            Parent root = FXMLLoader.load(Main.class.getResource("view/ConfigPane.fxml"));
+            Stage primaryStage;
+            primaryStage = (Stage) Session.get("stage");
+            primaryStage.setScene(new Scene(root, 1280, 720));
+            primaryStage.show();
 
         } else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -1,5 +1,7 @@
 package com.frosqh.bigbrother.controller;
 
+import com.frosqh.bigbrother.Session;
+import com.frosqh.bigbrother.thread.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -106,6 +108,10 @@ public class ConfigPaneController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Session.set("configMap",configMap);
+        Thread t = new Thread(new Timer());
+        t.start();
+        Session.set("alreadyDone",0);
         for (String key : configMap.keySet()){
             System.out.println(key + " : "+configMap.get(key));
         }
