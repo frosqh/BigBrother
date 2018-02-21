@@ -4,13 +4,12 @@ import com.frosqh.bigbrother.Main;
 import com.frosqh.bigbrother.Session;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.awt.image.ToolkitImage;
 
 import java.awt.*;
-import java.io.IOException;
-import java.time.*;
-import java.time.temporal.TemporalField;
-import java.util.Calendar;
+import java.time.DayOfWeek;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -138,7 +137,7 @@ public class Timer implements Runnable{
                 if (duration.getSeconds() > maxSessionSetting*3600){
                     Runtime runtime = Runtime.getRuntime();
                     log.info("EndTimer");
-                    Process proc = runtime.exec("shutdown -s -t 0 -f -c \"Temps de session dépassé ! :/\"");
+                    //Process proc = runtime.exec("shutdown -s -t 0 -f -c \"Temps de session dépassé ! :/\"");
                     System.exit(0);
                 }
 
@@ -172,12 +171,12 @@ public class Timer implements Runnable{
                 if (duration.getSeconds() > maxSessionSetting*3600){
                     Runtime runtime = Runtime.getRuntime();
                     log.info("EndTimer");
-                    Process proc = runtime.exec("shutdown -s -t 0 -f -c \"Temps de journée dépassé ! :/\"");
+                    //Process proc = runtime.exec("shutdown -s -t 0 -f -c \"Temps de journée dépassé ! :/\"");
                     System.exit(0);
                 }
 
                 /*
-                    Traitement des horaires interdit !
+                    Traitement des horaires interdits !
                  */
 
                 String[] forbids = forbidSetting.split(";");
@@ -195,8 +194,6 @@ public class Timer implements Runnable{
 
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } catch (AWTException e) {
             e.printStackTrace();
