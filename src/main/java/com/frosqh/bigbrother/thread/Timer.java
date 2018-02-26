@@ -2,6 +2,7 @@ package com.frosqh.bigbrother.thread;
 
 import com.frosqh.bigbrother.Main;
 import com.frosqh.bigbrother.Session;
+import jdk.internal.cmm.SystemResourcePressureImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -181,11 +182,10 @@ public class Timer implements Runnable{
 
                 String[] forbids = forbidSetting.split(";");
                 for (String s : forbids){
-                    System.out.println(s);
                     if (Integer.parseInt(s) == local.getHour()){
                         Runtime runtime = Runtime.getRuntime();
                         log.info("EndTimer");
-                        //Process proc = runtime.exec("shutdown -s -t 0 -f -c \"Temps de journée dépassé ! :/\"");
+                        //Process proc = runtime.exec("shutdown -s -t 0 -f -c \"Horaire interdite ! :/\"");
                         System.exit(0);
                     }
                 }

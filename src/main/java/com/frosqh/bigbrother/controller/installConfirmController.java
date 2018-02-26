@@ -77,7 +77,6 @@ public class installConfirmController {
             for (Byte b : pass.getBytes()){
                 buffWriter.write(b+3);
             }
-            buffWriter.write("\n");
             buffWriter.close();
 
             buffWriter = new BufferedWriter(new FileWriter(fileLoc));

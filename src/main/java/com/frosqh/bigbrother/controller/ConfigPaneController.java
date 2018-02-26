@@ -1,14 +1,20 @@
 package com.frosqh.bigbrother.controller;
 
+import com.frosqh.bigbrother.Main;
 import com.frosqh.bigbrother.Session;
 import com.frosqh.bigbrother.thread.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.controlsfx.control.spreadsheet.Grid;
 
 import java.io.*;
@@ -160,7 +166,13 @@ public class ConfigPaneController implements Initializable{
         initialize(null,null);
     }
 
-    public void ret(ActionEvent actionEvent) {
-
+    public void ret(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) Session.get("stage");
+        Parent root = FXMLLoader.load(Main.class.getResource("view/homePageUse.fxml"));
+        primaryStage.setTitle("BigBrother");
+        primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("image/icon.png")));
+        Session.set("stage",primaryStage);
+        primaryStage.show();
     }
 }

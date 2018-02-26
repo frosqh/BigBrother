@@ -33,16 +33,21 @@ public class    Main extends Application {
         File installDir = new File(fileLoc);
 
         if (installDir.exists()){
-            log.info("File already exists !");
-            return;
+            Parent root = FXMLLoader.load(getClass().getResource("view/homePageUse.fxml"));
+            primaryStage.setTitle("BigBrother");
+            primaryStage.setScene(new Scene(root, 1280, 720));
+            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("image/icon.png")));
+            Session.set("stage",primaryStage);
+            primaryStage.show();
+        } else {
+            //On effectue l'install !
+            Parent root = FXMLLoader.load(getClass().getResource("view/homePageInstall.fxml"));
+            primaryStage.setTitle("BigBrother");
+            primaryStage.setScene(new Scene(root, 1280, 720));
+            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("image/icon.png")));
+            Session.set("stage", primaryStage);
+            primaryStage.show();
         }
-        //On effectue l'install !
-        Parent root = FXMLLoader.load(getClass().getResource("view/homePageInstall.fxml"));
-        primaryStage.setTitle("BigBrother");
-        primaryStage.setScene(new Scene(root, 1280, 720));
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("image/icon.png")));
-        Session.set("stage",primaryStage);
-        primaryStage.show();
     }
 
 
