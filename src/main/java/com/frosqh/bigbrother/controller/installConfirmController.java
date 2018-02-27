@@ -90,9 +90,6 @@ public class installConfirmController {
             primaryStage.setScene(new Scene(root, 1280, 720));
             primaryStage.show();
 
-            Thread t = new Thread(new Timer());
-            t.start();
-
         } else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur à l'identification !");

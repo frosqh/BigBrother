@@ -1,5 +1,6 @@
 package com.frosqh.bigbrother.controller;
 
+import com.frosqh.bigbrother.Main;
 import com.frosqh.bigbrother.Session;
 import com.frosqh.bigbrother.thread.Timer;
 import javafx.fxml.FXML;
@@ -63,8 +64,10 @@ public class HomePageUse implements Initializable{
         }
         Session.set("configMap",configMap);
 
-        Thread t = new Thread(new Timer());
-        t.start();
+        if (!Timer.isStarted()) {
+            Thread t = new Thread(new Timer());
+            t.start();
+        }
 
 
 
@@ -73,27 +76,51 @@ public class HomePageUse implements Initializable{
         LocalDateTime localDate = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         DayOfWeek day = localDate.getDayOfWeek();
         String dayName = "";
+        String max = "max_";
+        String max_session = "max_session_";
+        String forbid = "forbid_";
         switch(day){
             case MONDAY:
                 dayName = "Lundi";
+                max += "monday";
+                max_session += "monday";
+                forbid += "monday";
                 break;
             case THURSDAY:
                 dayName = "Jeudi";
+                max += "thursday";
+                max_session += "thursday";
+                forbid += "thursday";
                 break;
             case TUESDAY:
                 dayName = "Mardi";
+                max += "tuesday";
+                max_session += "tuesday";
+                forbid += "tuesday";
                 break;
             case WEDNESDAY:
                 dayName = "Mercredi";
+                max += "wednesday";
+                max_session += "wednesday";
+                forbid += "wednesday";
                 break;
             case FRIDAY:
                 dayName = "Vendredi";
+                max += "friday";
+                max_session += "friday";
+                forbid += "friday";
                 break;
             case SATURDAY:
                 dayName = "Samedi";
+                max += "saturday";
+                max_session += "saturday";
+                forbid += "saturday";
                 break;
             case SUNDAY:
                 dayName = "Dimanche";
+                max += "sunday";
+                max_session += "sunday";
+                forbid += "sunday";
                 break;
         }
         System.out.println(dayName);
@@ -103,6 +130,20 @@ public class HomePageUse implements Initializable{
 
         //Init config thing
 
+        String hrsStr = hrsLabel.getText();
+        String forbidSettings = configMap.get(forbid);
+        if (Integer.parseInt(forbidSettings) == -1){
+            forbidSettings = configMap.get("default_forbid");
+        }
+        hrsStr = hrsStr.replace("%hrs",forbidSettings);
+        hrsLabel.setText(hrsStr);
+
+
+        
+        String maxSettings = configMap.get(max);
+        if (Integer.parseInt(maxSettings) == -1){
+            maxSettings = configMap.get("default_max_per_day");
+        }
 
 
     }
@@ -123,10 +164,10 @@ public class HomePageUse implements Initializable{
 
             if (email.equals(mail.getText()) && pass.equals(password.getText())){
                 Stage primaryStage = (Stage) Session.get("Stage");
-                Parent root = FXMLLoader.load(getClass().getResource("view/configPane.fxml"));
+                Parent root = FXMLLoader.load(Main.class.getResource("view/configPane.fxml"));
                 primaryStage.setTitle("BigBrother");
                 primaryStage.setScene(new Scene(root, 1280, 720));
-                primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("image/icon.png")));
+                primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("image/icon.png")));
                 Session.set("stage",primaryStage);
                 primaryStage.show();
             }

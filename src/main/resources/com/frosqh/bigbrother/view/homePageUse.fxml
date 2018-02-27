@@ -53,17 +53,17 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="hrsLabel" layoutX="69.0" layoutY="298.0" text="Tu peux donc jouer durant les heures suivantes : %hrs">
+      <Label fx:id="hrsLabel" layoutX="69.0" layoutY="298.0" text="Tu ne peux donc pas jouer durant les heures suivantes : &#10;%hrs">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="sessionLabel" layoutX="69.0" layoutY="354.0" text="Il te reste %hrsession:%minsession pour cette session">
+      <Label fx:id="sessionLabel" layoutX="69.0" layoutY="382.0" text="Il te reste %hrsession:%minsession pour cette session">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="dayLabel" layoutX="69.0" layoutY="412.0" text="Et %hrday:%minday pour la journée">
+      <Label fx:id="dayLabel" layoutX="69.0" layoutY="446.0" text="Et %hrday:%minday pour la journée">
          <font>
             <Font size="20.0" />
          </font>

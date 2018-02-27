@@ -16,15 +16,26 @@ import java.util.HashMap;
 
 public class Timer implements Runnable{
     Date startDate;
+    private static boolean started = false;
+    private static Duration dursession = null;
     final static Logger log = LogManager.getLogger(Main.class);
+    private static Duration durday = null;
 
     public Timer(){
         startDate = new Date();
         log.info("StartTimer");
     }
 
+    public static boolean isStarted() {
+        return started;
+    }
+
     @Override
     public void run() {
+        if (started){
+            return;
+        }
+        started = true;
         TrayIcon trayIcon = null;
         SystemTray tray = null;
         if (SystemTray.isSupported()) {
@@ -116,6 +127,7 @@ public class Timer implements Runnable{
                  */
 
                 Duration duration = Duration.between(localDate, local);
+                dursession = duration;
                 if (duration.getSeconds() > maxSessionSetting*3600-30*60 && !warn30S){
                     if (SystemTray.isSupported()){
                         tray.add(trayIcon);
@@ -150,6 +162,7 @@ public class Timer implements Runnable{
 
                 int alreadyDone = (int) Session.get("alreadyDone");
                 duration = duration.plusSeconds(alreadyDone);
+                durday = duration;
                 if (duration.getSeconds() > maxSetting*3600-30*60 && !warn30){
                     if (SystemTray.isSupported()){
                         tray.add(trayIcon);
