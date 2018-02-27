@@ -115,12 +115,6 @@ public class ConfigPaneController implements Initializable{
             e.printStackTrace();
         }
         Session.set("configMap",configMap);
-        Thread t = new Thread(new Timer());
-        t.start();
-        Session.set("alreadyDone",0);
-        for (String key : configMap.keySet()){
-            System.out.println(key + " : "+configMap.get(key));
-        }
     }
 
     private boolean vecContains(Object[] arr1, Object obj){

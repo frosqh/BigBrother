@@ -1,5 +1,6 @@
 package com.frosqh.bigbrother;
 
+import com.frosqh.bigbrother.thread.Timer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,6 +34,7 @@ public class    Main extends Application {
         File installDir = new File(fileLoc);
 
         if (installDir.exists()){
+
             Parent root = FXMLLoader.load(getClass().getResource("view/homePageUse.fxml"));
             primaryStage.setTitle("BigBrother");
             primaryStage.setScene(new Scene(root, 1280, 720));
@@ -52,7 +54,12 @@ public class    Main extends Application {
 
 
     public static void main(String[] args) {
+        if (!Session.checkLogs()){
+            System.out.println("Les logs ne sont pas valides ! ");
+            Session.deleteLogs();
+        }
         Session.init();
+        System.out.println(Session.get("alreadyDone"));
         launch(args);
     }
 }

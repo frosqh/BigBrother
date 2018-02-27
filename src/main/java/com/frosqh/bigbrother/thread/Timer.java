@@ -94,6 +94,8 @@ public class Timer implements Runnable{
                  */
 
                 configMap = (HashMap<String, String>) Session.get("configMap");
+                System.out.println(configMap);
+                System.out.println(max);
                 int maxSetting = Integer.parseInt(configMap.get(max));
                 if (maxSetting == -1){
                     maxSetting = Integer.parseInt(configMap.get("default_max_per_day"));
@@ -147,7 +149,7 @@ public class Timer implements Runnable{
                  */
 
                 int alreadyDone = (int) Session.get("alreadyDone");
-                duration.plusSeconds(alreadyDone);
+                duration = duration.plusSeconds(alreadyDone);
                 if (duration.getSeconds() > maxSetting*3600-30*60 && !warn30){
                     if (SystemTray.isSupported()){
                         tray.add(trayIcon);

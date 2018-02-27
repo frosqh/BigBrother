@@ -2,6 +2,7 @@ package com.frosqh.bigbrother.controller;
 
 import com.frosqh.bigbrother.Main;
 import com.frosqh.bigbrother.Session;
+import com.frosqh.bigbrother.thread.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -88,6 +89,9 @@ public class installConfirmController {
             primaryStage = (Stage) Session.get("stage");
             primaryStage.setScene(new Scene(root, 1280, 720));
             primaryStage.show();
+
+            Thread t = new Thread(new Timer());
+            t.start();
 
         } else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
